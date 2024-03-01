@@ -44,42 +44,29 @@
             font-size: 3em;
             margin-bottom: 15px;
         }
-
         df-messenger {
             z-index: 999;
             position: fixed;
             bottom: 16px;
             right: 16px;
         }
-
-        df-messenger-chat-bubble {
-            df-messenger-chat-window-height: 1100px;
-            df-messenger-chat-window-width: 680px;
-            df-messenger-titlebar-background: #aaaaaaa;
-        }
     </style>
-
     <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
     <df-messenger project-id="ondc-project-cloud" agent-id="fc952b9f-cbf8-4a6f-bc76-524278d89d8c" language-code="en"
         max-query-length="-1" allow-feedback="all">
-
         <df-messenger-chat-bubble chat-title="BankBuddy" chat-subtitle="Banking Made Easy"
             chat-title-icon="templates/Photos/Icon.png" bot-writing-text="BankBuddy is Thinking"
             placeholder-text="Your banking bot is online 🤖" chat-width="580px" chat-height="980px"
             style="df-messenger-chat-window-height:85px">
         </df-messenger-chat-bubble>
-
-
     </df-messenger>
-
-
 </head>
 
 <body>
 
     <header class="bg-google-blue text-white py-4">
         <div class="container">
-            <h1>Your Financial Expert</h1>
+            <h1>BankBuddy : Banking Made Easy</h1>
         </div>
     </header>
 
