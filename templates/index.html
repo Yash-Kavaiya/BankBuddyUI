@@ -1,13 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="static/css/style.css"
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Budddy</title>
-    
+<link rel="stylesheet" href="static/css/style.css" <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank Budddy</title>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Upload File</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-input">
+                    <div class="preview d-flex flex-column justify-content-center align-items-center">
+                        <img id="file-ip-1-preview">
+                        <p class="clear" onclick="clearImage()">Clear</p>
+                        <label for="file-ip-1" class="w-100 h-100 d-flex justify-content-center align-items-center">
+                            <p>Upload Image</p>
+                        </label>
+                        <input type="file" id="file-ip-1" accept-"image/*" onchange="showPreview(event);" />
+                    </div>
+                    <div class="btn-hldr text-center mt-3">
+                        <button class="btn btn-primary" onclick="submitImage()">Submit</button>
+                        <div class="upload_err_message mt-2" id="uplpoad-error-msg"></div>
+                    </div>
+                </div>
+                <div class="res-msg d-flex justify-content-center align-items-center mt-2">
+                    <p class="res-msg">Image Uploaded Successfully!</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </head>
+
 <body>
+<div><i class="fas fa-robot open button" onclick="openForm()"></i></div>
+
+<div class="chat-popup" id="myForm"> <div class="card" id="myForm">
+
+    Links
     
+    Find
+    
+    <div id="header">
+    
+    <div class="row w-100" id="">
+    
+    <div class="col-6 d-flex justify-content-start align-items-center">
+    
+    <i class="fas fa-robot px-2" style="font-size: 20px; color: white;"></i>
+    
+    <div class="head">ChatBot</div>
+    
+    </div>
+    
+    <div class="col-6 d-flex justify-content-end align-items-center">
+    
+    <div class="form-check form-switch px-2" style="display: none;">
+    
+    <input class="form-check-input custom-control-input1" type="checkbox" role="switch" id="trascriptToggle" checked>
+    
+    <label class="form-check-label text-white custom-control-label" for="trascriptToggle">Transcript</label>
+    
+    </div>
+    
+    <div style="color: white;" onclick="closeForm()">
+    
+    <i class="fa-solid fa-xmark"></i>
+    
+    </div>
+    
+    </div>
+    
+    </div></div>
+    <div><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1140 320"></svg></div>
+
+    <div id="message-section">
+<div class="message" id="bot" style="background-color: none;">
+ </div>
+
+    </div>
+
+    <div id="input-section">
+        <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
+        <button class="send" onclick="sendMessage()">
+            <div class="circle" ><i class="fas fa-paper-plane" style="color: beige;"></div>
+
+        </button>
+
+    </div>
 </body>
+<script>
+    function openForm(){document.getElementById("myForm").style.display = "block"}
+    function closeForm(){document.getElementById("myForm").style.display = "none"}
+</script>
 </html>
