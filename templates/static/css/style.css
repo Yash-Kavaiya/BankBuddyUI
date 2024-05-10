@@ -1,0 +1,7 @@
+body .card #message-section::-webkit-scrollbar{
+    height: 32vw;
+    padding: 0 2.5vw;
+    overflow-y; auto;
+    scrollbar-width: none !important;
+    scrollbar-width: none;
+}

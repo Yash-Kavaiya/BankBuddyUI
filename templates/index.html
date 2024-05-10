@@ -40,64 +40,58 @@
 </head>
 
 <body>
-<div><i class="fas fa-robot open button" onclick="openForm()"></i></div>
+    <div><i class="fas fa-robot open button" onclick="openForm()"></i></div>
 
-<div class="chat-popup" id="myForm"> <div class="card" id="myForm">
+    <div class="chat-popup" id="myForm">
+        <div class="card" id="myForm">
+            <div id="header">
+                <div class="row w-100" id="">
+                    <div class="col-6 d-flex justify-content-start align-items-center mt-2">
+                        <i class="fas fa-robot px-2" style="font-size: 20px; color: white;"></i>
+                        <div class="head px-4">ChatBot</div>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end align-items-center">
+                        <div class="form-check form-switch px-2" style="display: none;">
+                            <input class="form-check-input custom-control-input1" type="checkbox" role="switch"
+                                id="trascriptToggle" checked>
+                            <label class="form-check-label text-white custom-control-label"
+                                for="trascriptToggle">Transcript</label>
+                        </div>
+                        <div style="color: white;" onclick="closeForm()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1140 320">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:blue;stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:rgb(237, 237, 240);stop-opacity:1"/>
+                        </linearGradient>
+                    </defs><path d="M0,128L1440,256L1440,0L0,0Z"></path>
+                </svg></div>
 
-    Links
-    
-    Find
-    
-    <div id="header">
-    
-    <div class="row w-100" id="">
-    
-    <div class="col-6 d-flex justify-content-start align-items-center">
-    
-    <i class="fas fa-robot px-2" style="font-size: 20px; color: white;"></i>
-    
-    <div class="head">ChatBot</div>
-    
-    </div>
-    
-    <div class="col-6 d-flex justify-content-end align-items-center">
-    
-    <div class="form-check form-switch px-2" style="display: none;">
-    
-    <input class="form-check-input custom-control-input1" type="checkbox" role="switch" id="trascriptToggle" checked>
-    
-    <label class="form-check-label text-white custom-control-label" for="trascriptToggle">Transcript</label>
-    
-    </div>
-    
-    <div style="color: white;" onclick="closeForm()">
-    
-    <i class="fa-solid fa-xmark"></i>
-    
-    </div>
-    
-    </div>
-    
-    </div></div>
-    <div><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1140 320"></svg></div>
+            <div id="message-section">
+                <div class="message" id="bot"><span id="bot-response" style="font-size: 14px;font-weight: 400;">
+                    Hello Bank Buddy Chatbot</span>
+                </div>
 
-    <div id="message-section">
-<div class="message" id="bot" style="background-color: none;">
- </div>
+            </div>
 
-    </div>
+            <div id="input-section">
+                <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus" />
+                <button class="send" onclick="sendMessage()">
+                    <div class="circle"><i class="fas fa-paper-plane" style="color: beige;"></div>
 
-    <div id="input-section">
-        <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
-        <button class="send" onclick="sendMessage()">
-            <div class="circle" ><i class="fas fa-paper-plane" style="color: beige;"></div>
+                </button>
 
-        </button>
-
-    </div>
+            </div>
 </body>
 <script>
-    function openForm(){document.getElementById("myForm").style.display = "block"}
-    function closeForm(){document.getElementById("myForm").style.display = "none"}
+    function openForm() { document.getElementById("myForm").style.display = "block" }
+    function closeForm() { document.getElementById("myForm").style.display = "none" }
 </script>
+
 </html>
