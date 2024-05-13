@@ -1,104 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="static/css/style.css" <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bank Budddy</title>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Upload File</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-input">
-                    <div class="preview d-flex flex-column justify-content-center align-items-center">
-                        <img id="file-ip-1-preview">
-                        <p class="clear" onclick="clearImage()">Clear</p>
-                        <label for="file-ip-1" class="w-100 h-100 d-flex justify-content-center align-items-center">
-                            <p>Upload Image</p>
-                        </label>
-                        <input type="file" id="file-ip-1" accept-"image/*" onchange="showPreview(event);" />
-                    </div>
-                    <div class="btn-hldr text-center mt-3">
-                        <button class="btn btn-primary" onclick="submitImage()">Submit</button>
-                        <div class="upload_err_message mt-2" id="uplpoad-error-msg"></div>
-                    </div>
-                </div>
-                <div class="res-msg d-flex justify-content-center align-items-center mt-2">
-                    <p class="res-msg">Image Uploaded Successfully!</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .chat-icon img {
+            width: 30px;
+            height: 30px;
+            margin: 15px;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 9999;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .chat-body {
+            height: 300px;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .user-message {
+            background-color: #e6f7ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .bot-message {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-icon" onclick="toggleChatWindow()">
+        <img src="https://cdn.iconscout.com/icon/free/png-256/chat-2653946-2202741.png" alt="Chat Icon">
+    </div>
+
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>Chatbot</h3>
+        </div>
+        <div class="chat-body">
+            <div class="bot-message">
+                Hello! How can I assist you today?
             </div>
         </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
     </div>
-</div>
 
-</head>
+    <script>
+        function toggleChatWindow() {
+            const chatWindow = document.querySelector('.chat-window');
+            chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+        }
 
-<body>
-    <div><i class="fa fa-robot open button" onclick="openForm()"></i></div>
-    <div class="chat-popup" id="myForm">
-        <div class="card" id="myForm">
-            <div id="header" style="height: 3px;z-index: 100;">
-                <div class="row w-100" id="">
-                    <div class="col-8 d-flex justify-content-start align-items-center mt-2">
-                        <i class="fas fa-robot px-2" style="font-size: 20px; color: white;"></i>
-                        <div class="head px-4">Flights</div>
-                    </div>
-                    <!-- <div class="col-4 d-flex justify-content-end align-items-center">
-                        <div class="form-check form-switch px-2" style="display: none;">
-                            <input class="form-check-input custom-control-input1" type="checkbox" role="switch"
-                                id="trascriptToggle" checked>
-                            <label class="form-check-label text-white custom-control-label"
-                                for="trascriptToggle">Transcript</label>
-                        </div> -->
-                        <div style="color: white;" onclick="closeForm()">
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1140 300">
-                    <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:blue;stop-opacity:1"/>
-                            <stop offset="100%" style="stop-color:rgb(237, 237, 240);stop-opacity:1"/>
-                        </linearGradient>
-                    </defs><path d="M0,128L1440,256L1440,0L0,0Z"></path>
-                </svg></div>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const userMessage = userInput.value.trim();
 
-            <div id="message-section">
-                <div class="message" id="bot"><span id="bot-response" style="font-size: 14px;font-weight: 400;">
-                    Hello Bank Buddy Chatbot</span> 
-                </div>
-            <div class="message1 row" id="bot1" style="background:none">
-            <div class="col-6">
-                <div class="w-100 px-2">
-                    <div class="px-3 py-2 text-center" onclick="fetch_welcome_message('hi');"
+            if (userMessage) {
+                const chatBody = document.querySelector('.chat-body');
+                const userMessageElement = document.createElement('div');
+                userMessageElement.classList.add('user-message');
+                userMessageElement.textContent = userMessage;
+                chatBody.appendChild(userMessageElement);
 
-                </div>
+                // Send user message to the backend
+                fetch('/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const botMessageElement = document.createElement('div');
+                    botMessageElement.classList.add('bot-message');
+                    botMessageElement.textContent = data.response;
+                    chatBody.appendChild(botMessageElement);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-            </div>
-            </div>
-            </div>
-
-            <div id="input-section">
-                <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus" />
-                <button class="send" onclick="sendMessage()">
-                    <div class="circle"><i class="fas fa-paper-plane" style="color: beige;"></div>
-
-                </button>
-
-            </div>
+                userInput.value = '';
+            }
+        }
+    </script>
 </body>
-<script>
-    function openForm() { document.getElementById("myForm").style.display = "block" }
-    function closeForm() { document.getElementById("myForm").style.display = "none" }
-</script>
-
 </html>
