@@ -1,161 +1,1403 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Chatbot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    <title>BankBuddy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, minimal-ui">
+    <meta name="theme-color" content="#056EB9">
+    <meta name="msapplication-navbutton-color" content="#056EB9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#056EB9">
+    <meta name="description" content="BankBuddy is a suite of AI solutions built to power banks & financial institutions with customer experience management, hyper personalization &amp; automation.">
+    <meta name="keywords" content="conversational ai, whatsApp banking, bigital wallet, customer onboarding, personalization">
+    <meta name="author" content="BankBuddy">
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://bankbuddy.ai/">
+    <meta property="og:locale" content="en">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BankBuddy">
+    <meta property="og:description" content="BankBuddy is a suite of AI solutions built to power banks & financial institutions with customer experience management, hyper personalization &amp; automation.">
+    <meta property="og:url" content="https://bankbuddy.ai/">
+    <meta property="og:site_name" content="BankBuddy">
+    <meta property="og:image" content="https://bankbuddy.ai/img/start-screen_img/start-screen_1/cognitive_banking_cx.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="BankBuddy is a suite of AI solutions built to power banks & financial institutions with customer experience management, hyper personalization &amp; automation.">
+    <meta name="twitter:title" content="BankBuddy">
+    <meta name="twitter:site" content="@BankbuddyAi">
+    <meta name="twitter:creator" content="@BankbuddyAi">
 
-        .chat-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #007bff;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            z-index: 9999;
-        }
+    <!-- Favicons
+	================================================== -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon.ico">
 
-        .chat-icon img {
-            width: 30px;
-            height: 30px;
-            margin: 15px;
-        }
+    <!-- Critical styles
+	================================================== -->
+    <link rel="stylesheet" href="static/css/critical.min.css" type="text/css">
 
-        .chat-window {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            display: none;
-            z-index: 9999;
-        }
+    <!-- Style css -->
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="staticcss/icofont.min.css">
 
-        .chat-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-        }
+    <!-- Common styles
+	================================================== -->
+    <link rel="stylesheet" href="css/style.min.css" type="text/css">
 
-        .chat-body {
-            height: 300px;
-            padding: 10px;
-            overflow-y: scroll;
-        }
-
-        .chat-input {
-            display: flex;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-
-        .chat-input input {
-            flex-grow: 1;
-            padding: 5px;
-            border: none;
-            border-radius: 3px;
-        }
-
-        .chat-input button {
-            margin-left: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .user-message {
-            background-color: #e6f7ff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .bot-message {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="chat-icon" onclick="toggleChatWindow()">
-        <img src="https://cdn.iconscout.com/icon/free/png-256/chat-2653946-2202741.png" alt="Chat Icon">
-    </div>
-
-    <div class="chat-window">
-        <div class="chat-header">
-            <h3>Chatbot</h3>
-        </div>
-        <div class="chat-body">
-            <div class="bot-message">
-                Hello! How can I assist you today?
-            </div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-
+    <!-- Load google font
+	================================================== -->
     <script>
-        function toggleChatWindow() {
-            const chatWindow = document.querySelector('.chat-window');
-            chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function sendMessage() {
-            const userInput = document.getElementById('user-input');
-            const userMessage = userInput.value.trim();
-
-            if (userMessage) {
-                const chatBody = document.querySelector('.chat-body');
-                const userMessageElement = document.createElement('div');
-                userMessageElement.classList.add('user-message');
-                userMessageElement.textContent = userMessage;
-                chatBody.appendChild(userMessageElement);
-
-                // Send user message to the backend
-                fetch('/send-message', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ message: userMessage })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const botMessageElement = document.createElement('div');
-                    botMessageElement.classList.add('bot-message');
-                    botMessageElement.textContent = data.response;
-                    chatBody.appendChild(botMessageElement);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-                userInput.value = '';
+        WebFontConfig = {
+            google: {
+                families: ['Nunito+Sans:400,400i,700,700i,800,800i,900,900i', 'Quicksand:300,400,700']
             }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+
+    <!-- Load BB analytics
+		===================================================== -->
+    <script>
+        window.bb = window.bb || function() {
+            (bb.l = bb.l || []).push(arguments)
+        };
+        bb.d = +new Date;
+        bb('init');
+        bb('click');
+    </script>
+  
+
+    <!-- Load other scripts
+	================================================== -->
+    <script>
+        var _html = document.documentElement,
+            isTouch = (('ontouchstart' in _html) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
+
+        _html.className = _html.className.replace("no-js", "js");
+        _html.classList.add(isTouch ? "touch" : "no-touch");
+    </script>
+    <script src="js/device.min.js"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Brand",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://bankbuddy.ai/"
+            },
+            "headline": "BankBuddy",
+            "image": {
+                "@type": "ImageObject",
+                "url": "https://bankbuddy.ai/img/start-screen_img/start-screen_1/cognitive_banking_cx.png",
+                "width": "647",
+                "height": "568"
+            },
+            "datePublished": "2020-01-01T03:50:29+05:30",
+            "dateModified": "2021-06-28T23:03:29+05:30",
+            "author": {
+                "@type": "Person",
+                "name": "BankBuddy Team"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "BankBuddy",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://bankbuddy.ai/img/site_logo/BankBuddy.ai_logo.png",
+                    "width": 280,
+                    "height": 48
+                }
+            },
+            "keywords": ["Banking Artificial Intelligence, Conversational AI Banking, bankbuddy, bank buddy, artificial intelligence, cognitive banking cx, nlp, personalized banking, whatsapp banking, sme banking, voice banking, video kyc, insurence, card rewards & offers, bankbuddy.ai"],
+            "articleSection": "AI Banking",
+            "description": "BankBuddy is a suite of AI solutions built to power banks & financial institutions with customer experience management, hyper personalization &amp; automation."
         }
     </script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- header -->
+        <style>
+            .submenu>li>a>p {
+                color: #999999 !important;
+                font-size: 12px;
+            }
+        </style>
+        <header id="top-bar" class="top-bar top-bar--dark top-bar--dark-bg" data-nav-anchor="true">
+            <div class="top-bar__inner">
+                <div class="container-fluid">
+                    <div class="row align-items-center no-gutters">
+                        <a class="top-bar__logo site-logo" href="https://bankbuddy.ai/">
+					<img class="img-fluid" src="img/site_logo/BankBuddy.ai_logo.png" width="280" alt="Bankbuddy" />
+				</a>
+
+                        <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler" href="javascript:void(0);">
+					<span></span>
+				</a>
+
+                        <div class="top-bar__collapse">
+                            <nav id="top-bar__navigation" class="top-bar__navigation">
+                                <ul>
+                                    <li class="has-submenu">
+                                        <a class="nav-link" href="javascript:void(0);">Solutions</a>
+
+                                        <ul class="submenu">
+                                            <li>
+                                                <a href="">Digital Payments</a>
+                                                <ul class="submenu" style="width: 450px;">
+                                                    <li><a href="Wallet">
+													Digital Wallet
+													<p>Support multiple payment rails, multiple currencies, multiple
+														entities, multiple languages, and multiple algorithms for
+														charges,
+														commissions, interests, and fees. </p>
+
+												</a>
+
+
+                                                    </li>
+                                                    <li><a href="QrPay">
+													QR Pay
+													<p>Easy and secure payments via static, dynamic, and embedded QR
+														codes
+														for merchants, SMEs, and retail customers.
+													</p>
+												</a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a href="Wallet">
+													BNPL
+													<p>Increase conversions by offering flexible payment options </p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="Wallet">
+													Embedded Payments
+													<p>
+														Embed financial services-loans, insurance, and investments into
+														customer journeys on a single unified platform.
+													</p>
+												</a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a href="Wallet">
+													Merchant Ecosystem
+													<p>
+														Complete merchant in-app/web registration, manage QR codes, user
+														management, analytics & reports, configure charges and limits
+														under
+														merchant portal
+													</p>
+												</a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a href="Wallet">
+													Marketplace
+													<p>
+														Simplifies domestic & cross border payment transfers
+													</p>
+												</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="Omnichannel-Banking">Digital Banking</a>
+                                                <ul class="submenu" style="width: 450px;">
+                                                    <li><a href="Omnichannel-Banking">
+													Omnichannel
+													<p>Website | Mobile | WhatsApp | Facebook | Twitter | Webchat </p>
+												</a>
+                                                    </li>
+                                                    <li><a href="nlp">
+													Multilingual
+													<p>Supports 20+ languages across channels</p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="Bankbuddy-Agent-Assist">
+													Agent Assist
+													<p>Intelligent chat routing based on Skill, language , priority and
+														sentiment </p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="Hyper-Personalization">
+													Personalized Recommendation
+													<p>
+														Recommend products & services based on user’s behavioral persona
+													</p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="WhatsApp-Banking">
+													Surveys & FAQs
+													<p>
+														Enhance product & services by collecting feedback & responses
+													</p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="WhatsApp-Banking">
+													Complaint Management
+													<p>
+														Handles end-end customer complaint journeys with inbuilt
+														ticketing
+														system
+													</p>
+												</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="">Customer Onboarding</a>
+                                                <ul class="submenu" style="width: 450px;">
+                                                    <li><a href="Customer-Onboarding">
+													Modes
+													<p>Omnichannel support for both self-service and assisted modes of
+														onboarding </p>
+												</a>
+                                                    </li>
+                                                    <li><a href="technology">
+													AI Efficiency
+													<p>Inbuilt AI engine for face-match, liveness detection, OCR, and
+														product recommendation</p>
+												</a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a href="technology">
+													Comprehensive Onboarding Solutions
+													<p>Prebuilt onboarding modules- retail, corporate, SMEs </p>
+
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="Customer-Onboarding">
+													Wide Product
+													<p>
+														Dynamic journeys based on the product & customer attributes-
+														accounts, cards, loans, and insurance.
+													</p>
+												</a></li>
+                                                    <li>
+                                                        <a href="technology">
+													Ecosystem
+													<p>
+														Onboard ecosystem partners -merchants and agents, offer a wide
+														range
+														of products with inbuilt risk management.
+													</p>
+												</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="">Customer Engagement</a>
+                                                <ul class="submenu" style="width: 450px;">
+                                                    <li><a href="Hyper-Personalization">
+													Hyper personalisation
+													<p>Enhance digital banking CX with personalized micro-moments at
+														every
+														customer touchpoint.</p>
+												</a></li>
+                                                    <li><a href="recommendation">
+													Conversion
+													<p>ML models to recommend relevant offers and CTAs to increase
+														conversion.</p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="Hyper-Personalization">
+													Revenue Expansion
+													<p>Dynamic persona-based recommendations for new & existing
+														customers
+													</p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="Hyper-Personalization">
+													Proactive Service
+													<p>
+														Customer retention and churn prevention-FAQs
+														/complaints/campaigns
+													</p>
+												</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="recommendation">
+													Loyalty, Offers & Cashback
+													<p>
+														Increases brand loyalty and generates revenue
+													</p>
+												</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a class="nav-link" href="javascript:void(0);">Technology</a>
+
+                                        <ul class="submenu">
+                                            <li><a href="technology">Composite AI</a></li>
+                                            <li><a href="recommendation">Recommendation</a></li>
+                                            <li><a href="nlp">NLP</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has-submenu">
+                                        <a class="nav-link" href="javascript:void(0);">Resources</a>
+
+                                        <ul class="submenu">
+                                            <li><a href="blog">Blogs</a></li>
+                                            <li><a href="whitepapers">White Papers</a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </nav>
+
+                            <div id="top-bar__action" class="top-bar__action">
+                                <div class="d-xl-flex flex-xl-row flex-xl-wrap align-items-xl-center">
+
+
+                                    <div class="top-bar__side-menu-button js-side-menu-open">
+                                        <span class="line"></span>
+                                        <span class="line"></span>
+                                        <span class="line"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- side menu -->
+        <div id="side-menu" class="side-menu  d-none">
+            <span class="side-menu__button-close  js-side-menu-close"></span>
+
+            <div class="side-menu__inner">
+
+                <address class="side-menu__address">
+			<img class="img-fluid" src="img/site_logo/Bankbuddy.ai.png" width="159" height="45" alt="Logo" /><br><br>
+
+			<a href="mailto:hello@affinsys.com">hello@affinsys.com</a> <br>
+			<a href="tel:+971501627569">+971 50 1627569</a>
+
+			<div class="s-btns s-btns--md s-btns--colored s-btns--rounded">
+				<ul class="d-flex flex-row flex-wrap align-items-center">
+					<li><a class="f" href="https://www.facebook.com/bankbuddyai" target="_blank" rel="nofollow"><i class="fontello-facebook"></i></a></li>
+					<li><a class="t" href="https://twitter.com/BankbuddyAi" target="_blank" rel="nofollow"><i class="fontello-twitter"></i></a></li>
+					<li style="margin-right: 20px"><a class="y" href="https://www.youtube.com/channel/UCAh_vxzXIWhyPYP7mz-LBtA" target="_blank" rel="nofollow"><i class="fontello-youtube-play"></i></a></li>				
+					<li><a class="l" href="https://www.linkedin.com/company/bankbuddyai/" target="_blank" rel="nofollow"><i class="fontello-linkedin"></i></a></li>
+					<li><a class="i" href="https://www.instagram.com/bankbuddy.ai/" target="_blank" rel="nofollow"><i class="fontello-instagram"></i></a></li>
+				</ul>
+			</div> <br>		
+
+			DIFC Fintech Hive, Dubai, UAE <br><br>
+			Unispace Business Center<br> EPIP Zone, Whitefield, Bangalore, India <br><br>
+
+			<a class="custom-btn custom-btn--medium custom-btn--style-5" href="contact-us">Get in Touch</a>
+		</address>
+            </div>
+        </div>
+        <!-- start start screen -->
+        <div id="start-screen" class="start-screen start-screen--full-height start-screen--style-1">
+            <div class="start-screen__bg-container">
+                <div class="start-screen__bg" style="background-image: url(img/start-screen_img/start-screen_1/bg_1.png);background-position: center bottom;">
+                </div>
+            </div>
+
+            <div class="start-screen__shapes  d-none d-lg-block">
+                <img class="img-shape d-none d-xl-block" style="left:-3%" src="img/start-screen_img/start-screen_1/shape_1.png" alt="Shape">
+
+                <img class="img-shape mt-70" src="img/start-screen_img/start-screen_1/cognitive_banking_cx.png" alt="Cognitive Banking CX">
+            </div>
+
+            <div class="start-screen__content-container">
+                <div class="start-screen__content__item align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-10 col-lg-6">
+                                <h1 id="header" style="font-size: 50px">Enabling Banks <span style="color: #0C5491; font-weight: 600">Engage</span> Customers better with Generative AI</h1>
+                                <!-- <h4>Artificial Intelligence based platform for superlative customer experience</h4> -->
+
+                                <p class="pt-20">
+                                    BankBuddy digital banking AI platform helps you get closer to your customers with a Human+AI , 'friend-in-need' intuitive experience across Channels, Languages, Financial Journeys & Transactions.
+                                </p>
+
+                                <div class="spacer py-2 py-sm-4"></div>
+
+                                <div class="d-sm-table">
+                                    <div class="d-sm-table-cell  pb-5 pb-sm-0 pr-sm-8 pr-md-10">
+                                        <a class="custom-btn custom-btn--big custom-btn--style-1" href="https://bankbuddy.ai/contact-us">Get In Touch</a>
+                                    </div>
+
+                                    <!-- <div class="d-sm-table-cell">
+										<a class="play-btn" href="https://www.youtube.com/watch?v=Rk-ozg88fes"
+											data-fancybox="start-screen-video" rel="nofollow"><span></span>Watch video</a>
+									</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end start screen -->
+
+        <!-- start main -->
+        <main>
+            <!-- Load lazyLoad scripts
+			================================================== -->
+            <script>
+                (function(w, d) {
+                    var m = d.getElementsByTagName('main')[0],
+                        s = d.createElement("script"),
+                        v = !("IntersectionObserver" in w) ? "8.17.0" : "12.0.0",
+                        o = {
+                            elements_selector: ".lazy",
+                            threshold: 500,
+                            callback_enter: function(element) {
+
+                            },
+                            callback_load: function(element) {
+
+                            },
+                            callback_set: function(element) {
+
+                                oTimeout = setTimeout(function() {
+                                    clearTimeout(oTimeout);
+
+                                    AOS.refresh();
+                                }, 1000);
+                            },
+                            callback_error: function(element) {
+                                element.src = "https://placeholdit.imgix.net/~text?txtsize=21&amp;txt=Image%20not%20load&amp;w=200&amp;h=200";
+                            }
+                        };
+                    s.type = 'text/javascript';
+                    s.async = false; // This includes the script as async. See the "recipes" section for more information about async loading of LazyLoad.
+                    s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
+                    m.appendChild(s);
+                    // m.insertBefore(s, m.firstChild);
+                    w.lazyLoadOptions = o;
+                }(window, document));
+            </script>
+
+
+            <!-- ***** Artificial Section Start ***** -->
+            <section id="benifits" class="benifits-area ptb_100 ai-section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="text-center">
+                                <h2 class="__title h2">Artificial Intelligence to redefine your digital banking experience
+                                </h2>
+
+                                <p>
+                                    With an impeccable combination of <a href="technology">Generative AI</a>, domain expertise and pre built customer journeys, we at BankBuddy help financial institutions deliver frictionless and personalized digital banking
+                                    CX while achieving lasting cost reductions and revenue uplift.
+                                </p>
+                            </div>
+
+                            <p class="text-center">
+                                Kick Start your Strategic journey towards AI-Powered Personalized Banking
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row pt-50">
+                        <!-- Benifits Item -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="fade-up">
+                            <div class="benifits-item text-center p-3">
+                                <div class="feature-icon">
+                                    <img src="img/ico/Digital-Sales.png" alt="Digital Sales">
+                                </div>
+                                <!-- Benifits Text -->
+                                <div class="benifits-text">
+                                    <h3 class="mb-2">Digital Sales</h3>
+                                    <p>Boost prospect conversions & revenues with hyper personalized campaigns, persona based recommendations & social media management.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Benifits Item -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                            <div class="benifits-item text-center p-3">
+                                <div class="feature-icon">
+                                    <img src="img/ico/Digital-Onboarding.png" alt="Digital Onboarding">
+                                </div>
+                                <!-- Benifits Text -->
+                                <div class="benifits-text">
+                                    <h3 class="mb-2">Digital Onboarding</h3>
+                                    <p>Extend digital reach & reduce customer acquisition costs with AI powered onboarding & eKYC across languages, journeys & channels.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Benifits Item -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                            <div class="benifits-item text-center p-3">
+                                <div class="feature-icon">
+                                    <img src="img/ico/Digital-Engagement.png" alt="Digital Engagement">
+                                </div>
+                                <!-- Benifits Text -->
+                                <div class="benifits-text">
+                                    <h3 class="mb-2">Digital Engagement</h3>
+                                    <p>Enhance digital adoption with proactive Human + AI customer service across all channels at 60% lower cost to serve.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Benifits Item -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+                            <div class="benifits-item text-center p-3">
+                                <div class="feature-icon">
+                                    <img src="img/ico/Digital-Cx.png" alt="Digital CX">
+                                </div>
+                                <!-- Benifits Text -->
+                                <div class="benifits-text">
+                                    <h3 class="mb-2">Digital CX</h3>
+                                    <p>Increase customer retention upsell & cross sell with hyper personalized omni-digital banking experiences for customers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ***** Benifits Area End ***** -->
+
+            <!-- start section -->
+            <section class="section--no-pb m-30">
+                <!-- <section class="section"> -->
+                <div class="container text-center">
+                    <h2 class="__title h2">Your Innovation partner</h2>
+                    <p class="lh-30 pt-20">Information, Transaction, Onboarding (Video KYC/eKYC), Authentication, Advise, Cross sell, Upsell, Churn prevention, Offers, Rewards or more. BankBuddy has pre-built solutions across segments, so that no matter what your customers
+                        need, we make sure you have the means to serve them.  </p>
+                    <div class="spacer py-3 py-md-5 py-lg-6"></div>
+
+                    <div class="row align-items-lg-center">
+                        <div class="col-12 col-lg-4 push-lg-4 text-center pb-30">
+                            <img class="img-fluid" width="289" height="585" src="img/innovation_partner.png" alt="innovation_partner">
+                        </div>
+
+                        <div class="spacer py-5 d-lg-none"></div>
+
+                        <div class="col-12 col-lg-8">
+
+                            <!-- start feature -->
+                            <div class="feature feature--s1">
+                                <div class="__inner">
+                                    <div class="row">
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6 pull-lg-6">
+                                            <div class="__item  text-center text-md-right">
+                                                <div class="row justify-content-sm-center flex-md-row-reverse">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="WhatsApp-Banking">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/whatsApp-banking.png" height="80"
+																		width="80" alt="WhatsApp Banking">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="WhatsApp-Banking">WhatsApp Banking</a></h4>
+
+                                                        <p>
+                                                            Extend your customer reach with MFA based secure transactions and end-to-end banking services on the world’s favorite messaging platform
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+
+
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6">
+                                            <div class="__item  text-center text-md-left">
+                                                <div class="row justify-content-sm-center">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Digital-Human">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/Digital-Human.png" height="80"
+																		width="80" alt="Digital Human">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Digital-Human">GenAI Powered Digital Human</a>
+                                                        </h4>
+
+                                                        <p>
+                                                            Increase adoption of self-service channels, ensure goal completion with guided process flows and engage customers with a multi sensory approach with AI powered digital humans.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+                                    </div>
+
+                                    <!-- <div class="spacer py-lg-3 py-xl-7 d-none d-lg-block"></div> -->
+
+                                    <div class="row">
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6 pull-lg-6">
+                                            <div class="__item  text-center text-md-right">
+                                                <div class="row justify-content-sm-center flex-md-row-reverse">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Wallet">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/WhatsApp-wallet.png" height="80"
+																		width="80" alt="WhatsApp Wallet">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Wallet">Digital
+																Wallet</a></h4>
+
+                                                        <p>
+                                                            Boost new customer acquisition, remove barriers to digital adoption and enable financial inclusion with one of a kind private label Omni-channel wallet with QR pay, virtual accounts, accounting/GL.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6">
+                                            <div class="__item  text-center text-md-left">
+                                                <div class="row justify-content-sm-center">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Voice-Banking">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/Voice-banking.png" height="80"
+																		width="80" alt="Voice Banking">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Voice-Banking">Voice Banking</a>
+                                                        </h4>
+
+                                                        <p>
+                                                            Integrate voice based interactions and deliver frictionless  zero touch banking with end to end banking services across all channels, devices and digital touch points
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+                                    </div>
+
+                                    <div class="row">
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6 pull-lg-6">
+                                            <div class="__item  text-center text-md-right">
+                                                <div class="row justify-content-sm-center flex-md-row-reverse">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Customer-Onboarding">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/Customer-Onboarding.png"
+																		height="80" width="80"
+																		alt="Customer Onboarding">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Customer-Onboarding">Customer
+																Onboarding</a></h4>
+
+                                                        <p>
+                                                            Reduce customer acquisition costs and digitally onboard new customers with eKYC, liveness detection, document verification & face match, OCR, Deep fake detection, all under 3 minutes.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6">
+                                            <div class="__item  text-center text-md-left">
+                                                <div class="row justify-content-sm-center">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Bankbuddy-Agent-Assist">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/Agent-assist.png" height="80"
+																		width="80" alt="Agent Assist">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Bankbuddy-Agent-Assist">Agent
+																Assist</a></h4>
+
+                                                        <p>
+                                                            Offer frictionless human + AI service with automated bot to agent handoff across channels, end to end automated Case Management, Generative AI powered agent suggestions. Analyze customer behavior and track key metrics with real-time analytics, reports
+                                                            & live stats.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+                                    </div>
+
+                                    <div class="row">
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6 pull-lg-6">
+                                            <div class="__item  text-center text-md-right">
+                                                <div class="row justify-content-sm-center flex-md-row-reverse">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Hyper-Personalization">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/Personalization.png" height="80"
+																		width="80" alt="Personalization">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Hyper-Personalization">Personalization</a></h4>
+
+                                                        <p>
+                                                            Enhance digital banking CX with personalized micro-moments at every customer touchpoint. Increase conversions & boost cross sell upsell with dynamic persona based recommendations for new & existing customers
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+
+                                        <!-- start item -->
+                                        <div class="col-12 col-md-6">
+                                            <div class="__item  text-center text-md-left">
+                                                <div class="row justify-content-sm-center">
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg-auto">
+                                                        <div class="mb-3 mb-lg-0">
+                                                            <i class="__ico">
+																<a href="Hyper-Personalization">
+																	<img class="img-fluid lazyLoad"
+																		src="img/ico/Sme-banking.png" height="80"
+																		width="80" alt="SME banking">
+																</a>
+															</i>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-10 col-md-12 col-lg">
+                                                        <h4 class="__title"><a href="Hyper-Personalization">Campaign & Lead Management</a>
+                                                        </h4>
+
+                                                        <p>
+                                                            Omni-channel customer profile/lead manager with automated campaigns Marketing for 10X boost in conversion.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end item -->
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- end feature -->
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end section -->
+
+            <!-- start section -->
+            <div class="section section--light-blue-bg section--bg-img lazy" data-bg="url('img/base_bg_2_2.jpg')">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- start screens app -->
+                            <div class="screens-app">
+                                <div class="js-slick" data-slick='{
+										"autoplay": true,
+										"arrows": false,
+										"dots": true,
+										"speed": 1200,
+										"slidesToShow": 1,
+										"dotsClass": "slick-dots text-center",
+										"responsive": [
+										{
+											"breakpoint":576,
+											"settings":{
+												"slidesToShow": 2
+											}
+										},
+										{
+											"breakpoint":767,
+											"settings":{
+												"slidesToShow": 2
+											}
+										},
+										{
+											"breakpoint":991,
+											"settings":{
+												"slidesToShow": 3
+											}
+										},
+										{
+											"breakpoint":1199,
+											"settings":{
+												"slidesToShow": 4
+											}
+										}]
+									}'>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/difc.png" alt="difc">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/ai-venture.png" alt="ai-venture">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/microsoft.png" alt="microsoft">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/fintech-ace.png" alt="fintech-ace">
+                                        </figure>
+                                    </div>
+
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/fintech.png" width="95" alt="fintech">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/web_startup_academy.png" alt="web_startup_academy">
+                                        </figure>
+
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/bootcamp.png" alt="bootcamp">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/difc_fintech.png" alt="difc_fintech">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/emirates.png" alt="emirates">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/fexcelerate.png" alt="fexcelerate">
+                                        </figure>
+                                    </div>
+
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/global_fintech.png" alt="global_fintech">
+                                        </figure>
+                                    </div>
+
+                                    <div class="__item">
+                                        <figure class="__image">
+                                            <img class="img-fluid center" src="img/awards/iot_winner.png" alt="iot_winner">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end screens app -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end section -->
+
+            <!-- ***** Features Area Start ***** -->
+            <section id="features" class="section features-area ptb_100">
+                <div class="shapes-container">
+                    <div class="shape1 bg-shape"></div>
+                </div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="features-text">
+                                <!-- Headings -->
+                                <div class="headings d-flex align-items-center mb-4">
+                                    <h2 class="__title h2 text-capitalize">Why BankBuddy</h2>
+                                </div>
+                                <p class="my-3">BankBuddy is a domain specific Artificial Intelligence platform for collective intelligence across silos of systems, products, departments and processes.
+                                </p>
+                                <!-- Counter List -->
+                                <div class="counter-list">
+                                    <h3>Your Innovation partner</h3>
+                                    <p>Magical combination of design thinking, user experience, banking technology, customer experience & your business expertise to foster continuous co-innovation.
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <!-- Single Counter -->
+                                            <div class="single-counter py-3 text-center">
+                                                <div class="counter-icon">
+                                                    <i class="__ico">
+														<img src="img/ico/Customer_journeys.png" width="100"
+															alt="Customer Journeys">
+													</i>
+                                                </div>
+                                                <div class="counter-text">
+                                                    <span class="counter d-inline-block mt-3 mb-2">220+</span>
+                                                    <p>Customer Journeys</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <!-- Single Counter -->
+                                            <div class="single-counter py-3 text-center">
+                                                <div class="counter-icon">
+                                                    <i class="__ico">
+														<img src="img/ico/Customer_Attributes.png" width="100"
+															alt="Customer Attributes">
+													</i>
+                                                </div>
+                                                <div class="counter-text">
+                                                    <span class="counter d-inline-block mt-3 mb-2">122</span>
+                                                    <p>Customer Attributes</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <!-- Single Counter -->
+                                            <div class="single-counter py-3 text-center">
+                                                <div class="counter-icon">
+                                                    <i class="__ico">
+														<img src="img/ico/Strong_Ontology.png" width="100"
+															alt="Generative AI Applications">
+													</i>
+                                                </div>
+                                                <div class="counter-text">
+                                                    <span class="counter d-inline-block mt-3 mb-2">15</span>
+                                                    <p>Generative AI Applications</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <!-- Single Counter -->
+                                            <div class="single-counter py-3 text-center">
+                                                <div class="counter-icon">
+                                                    <i class="__ico">
+														<img src="img/ico/Customer_Countries.png" width="100"
+															alt="Customer Countries">
+													</i>
+                                                </div>
+                                                <div class="counter-text">
+                                                    <span class="counter d-inline-block mt-3 mb-2">25</span>
+                                                    <p>Customer Countries</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <!-- Single Counter -->
+                                            <div class="single-counter py-3 text-center">
+                                                <div class="counter-icon">
+                                                    <i class="__ico">
+														<img src="img/ico/Languages_Supported.png" width="100"
+															alt="Languages Supported">
+													</i>
+                                                </div>
+                                                <div class="counter-text">
+                                                    <span class="counter d-inline-block mt-3 mb-2">100+</span>
+                                                    <p>Languages Supported</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-5 offset-lg-1">
+                            <!-- Featured Items -->
+                            <div class="featured-items">
+                                <ul>
+                                    <li>
+                                        <div class="single-features media p-3">
+                                            <div class="features-title mr-3">
+                                                <img src="img/ico/comprehensive_ai.svg" alt="Generative AI">
+                                            </div>
+                                            <div class="features-text media-body">
+                                                <h3>Generative AI</h3>
+                                                <p>Customer journeys embedded with NLP, Computer vision, Speech, Recommender System.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-features media p-3">
+                                            <div class="features-title mr-3">
+                                                <img src="img/ico/faster_time.svg" alt="Faster time to market">
+                                            </div>
+                                            <div class="features-text media-body">
+                                                <h3>Faster time to market</h3>
+                                                <p>Deploy Artificial Intelligence solutions in weeks with Pre-built AI models, Domain NLP, Data pipeline, Language packs, Customer journeys, Channel integrations & Core banking adapters </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li style="margin-top: 10px;">
+                                        <div class="single-features media p-3">
+                                            <div class="features-title mr-3">
+                                                <img src="img/ico/future_proof.svg" alt="Future Proof">
+                                            </div>
+                                            <div class="features-text media-body">
+                                                <h3>Future Proof</h3>
+                                                <p>Extendable AI infrastructure to add new models, journeys, languages, intelligence et al </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li style="margin-top: 12px;">
+                                        <div class="single-features media p-3">
+                                            <div class="features-title mr-3">
+                                                <img src="img/ico/domain_expertise.svg" alt="Domain Expertise">
+                                            </div>
+                                            <div class="features-text media-body">
+                                                <h3>Domain Expertise</h3>
+                                                <p>Retail banking, investments, PFM, cash management, SME banking, Trade finance & more.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ***** Features Area End ***** -->
+
+            <!-- start awards & accolades section -->
+            <section id="screens-app" class="section--light-blue-bg section--bg-img lazy pt-50 pb-50" data-bg="url('img/base_bg_2_2.jpg')">
+                <div class="container">
+                    <div class="section-heading--center">
+                        <h2 class="__title">Awards & Accolades</h2>
+                    </div>
+
+                    <div class="variable slider">
+                        <div class="js-slick" data-slick='{
+							"autoplay": true,
+							"arrows": false,
+							"dots": true,
+							"speed": 1200,
+							"slidesToShow": 2,
+							"dotsClass": "slick-dots text-center",
+							"responsive": [
+							{
+								"breakpoint":576,
+								"settings":{
+									"slidesToShow": 2
+								}
+							},
+							{
+								"breakpoint":767,
+								"settings":{
+									"slidesToShow": 2
+								}
+							}]
+						}'>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <a href="https://bankbuddy.ai/Bankbuddy-wins-Fintech-of-the-year-Startup-award"><img
+											src="img/awards/slideshow/Award-Image-1.gif"
+											alt="Fintech Startup Of The Year"></a>
+                                </figure>
+                            </div>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <a href="https://bankbuddy.ai/bankbuddy-wins-finx-global-fintech-of-the-year-award"><img
+											src="img/awards/slideshow/Award-Image-2.gif"
+											alt="Finx Global Fintech Of The Year"></a>
+                                </figure>
+                            </div>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <a href="https://www.dubaichamber.com/whats-happening/chamber_news/market-access-concludes-second-cohort-with-several-corporate-startup-collaborations-announced"><img
+											src="img/awards/slideshow/Award-Image-3.gif"
+											alt="Hyper-Personalization Challenge" rel=”nofollow”></a>
+                                </figure>
+                            </div>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <img src="img/awards/slideshow/Award-Image-4.gif" alt="Top 50 AI Companies">
+                                </figure>
+                            </div>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <a href="https://bankbuddy.ai/bankbuddy-wins-finablr-challenge"><img
+											src="img/awards/slideshow/Award-Image-5.gif" alt="Finablr IoT Challenge"></a>
+                                </figure>
+                            </div>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <a href="https://twitter.com/FinTechAD/status/1305782154673164288" rel=”nofollow”><img
+											src="img/awards/slideshow/Award-Image-6.gif" alt="Top 50 Global Fintechs"></a>
+                                </figure>
+                            </div>
+                            <div class="__item  text-center">
+                                <figure class="__image">
+                                    <a href="https://emiratesnbd.com/en/media-centre/media-centre-info/?mcid_en=802&ref=homepage-news" rel=”nofollow”><img
+											src="img/awards/slideshow/Award-Image-7.gif"
+											alt="NBD Open Banking Sandbox Certified"></a>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end awards & accolades section -->
+
+            <!-- start section -->
+            <section id="subscribe" class="pt-100">
+                <div class="container">
+                    <div class="row justify-content-lg-between align-items-md-center">
+                        <div class="col-12 col-md-7 col-lg-6 col-xl-5">
+                            <div class="section-heading">
+
+                                <h2 class="__title">Get in touch with us</h2>
+                                <p>
+                                    See how BankBuddy helps you personalize customer engagement & increase cross sell, upsell & conversion
+                                </p>
+                            </div>
+
+                            <div class="spacer py-4"></div>
+                            <form class="form--horizontal" method="post">
+                                <div class="row no-gutters">
+                                    <div class="col-12 col-sm">
+                                        <div class="input-wrp">
+                                            <input class="textfield textfield--grey" id="email" placeholder="Email address" type="email" name="email" maxlength="80" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-auto">
+                                        <button class="custom-btn custom-btn--medium custom-btn--style-1 wide" type="submit" onclick="submitEmail();">Schedule Demo</button><br><br>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="spacer py-5 d-md-none"></div>
+
+                        <div class="col-12 col-md-5 col-lg-6">
+                            <figure class="image-container js-tilt" data-tilt-speed="600" data-tilt-max="15" data-tilt-perspective="700">
+                                <img class="img-fluid lazy" width="571" height="490" src="img/blank.gif" data-src="img/subscribe.png" data-srcset="img/subscribe.png 1x, img/subscribe.png 2x" alt="subscribe">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end section -->
+        </main>
+
+        <!-- start footer -->
+
+        <!-- start section -->
+        <div class="section section--no-pt section--no-pb">
+            <!-- start footer -->
+            <footer class="footer footer--s2 footer--color-dark">
+                <div class="footer__line footer__line--first">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                <div class="footer__item text-center">
+                                    <a class="footer__logo site-logo" href="https://bankbuddy.ai/">
+                            <img class="img-fluid" src="img/site_logo/bb-footer.png" width="80" height="45"
+                                alt="Footer-Logo">
+                        </a>
+                                    <p>Artificial Intelligence based platform for superlative customer experience</p>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col col-sm-4 col-md-3 col-lg-2">
+                    <div class="footer__item">
+                        <nav class="footer__navigation">
+                            <ul>
+                                <li><a href="retail">Retail</a></li>
+                                <li><a href="corporate">Corporate </a></li>
+                                <li><a href="investment">Investment</a></li>
+                                <li><a href="insurance">Insurance</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div> -->
+
+                            <div class="col col-sm-4 col-md-3 col-lg-2">
+                                <div class="footer__item">
+
+                                    <nav class="footer__navigation">
+                                        <ul>
+                                            <li><a href="technology">Technology</a></li>
+                                            <li><a href="recommendation">Recommendation</a></li>
+                                            <li><a href="nlp">NLP</a></li>
+                                            <li><a href="terms-conditions">Terms & Conditions</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="col col-sm-4 col-md-3 col-lg-2">
+                                <div class="footer__item">
+                                    <nav class="footer__navigation">
+                                        <ul>
+                                            <li><a href="privacy-policy">Privacy Policy</a></li>
+                                            <li><a href="about-us">About us</a></li>
+                                            <li><a href="contact-us">Contact Us </a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-3 col-xl-2 offset-xl-1">
+                                <div class="footer__item">
+
+                                    <div class="s-btns s-btns--md s-btns--colored s-btns--rounded">
+                                        <ul class="d-flex flex-row flex-wrap align-items-center">
+                                            <li><a class="f" href="https://www.facebook.com/bankbuddyai" target="_blank" rel=”nofollow”><i class="fontello-facebook"></i></a></li>
+                                            <li><a class="t" href="https://twitter.com/BankbuddyAi" target="_blank" rel=”nofollow”><i class="fontello-twitter"></i></a></li>
+                                            <li><a class="y" href="https://www.youtube.com/channel/UCAh_vxzXIWhyPYP7mz-LBtA" target="_blank" rel=”nofollow”><i class="fontello-youtube-play"></i></a></li>
+                                            <li><a class="i" href="https://www.instagram.com/bankbuddy.ai/" target="_blank" rel=”nofollow”><i class="fontello-instagram"></i></a></li>
+                                            <li><a class="l" href="https://www.linkedin.com/company/bankbuddyai/" target="_blank" rel=”nofollow”><i class="fontello-linkedin"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer__line footer__line--second">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="footer__item">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer__waves-container">
+                    <svg class="footer__wave js-wave" data-wave='{"height": 40, "bones": 5, "amplitude": 70, "color": "rgba(196, 227, 251, 0.28)", "speed": 0.3}' width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs></defs>
+            <path d="" />
+        </svg>
+
+                    <svg class="footer__wave js-wave" data-wave='{"height": 60, "bones": 6, "amplitude": 90, "color": "rgba(196, 227, 251, 0.28)", "speed": 0.35}' width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs></defs>
+            <path d="" />
+        </svg>
+                </div>
+            </footer>
+            <!-- end footer -->
+        </div>
+        <!-- end section -->
+    </div>
+
+    <div id="btn-to-top-wrap">
+        <a id="btn-to-top" class="circled" href="javascript:void(0);" data-visible-offset="800"></a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery-2.2.4.min.js"><\/script>')
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="js/main.min.js"></script>
+    <script src="js/dynamic_content.js"></script>
+    <script>
+        function cookieParser() {
+            let all = document.cookie.split("; ");
+            return all.reduce(
+                (map, val) => ({ ...map,
+                    [val.split("=")[0]]: val.split("=")[1]
+                }), {}
+            );
+        }
+        // let dc = new DynamicContent({ loggedIn: !!cookieParser()["lgid"], identification: cookieParser()["lgid"]}??"user");
+        let dc = new DynamicContent({
+            loggedIn: !!cookieParser()["lgid"],
+            identification: cookieParser()["lgid"] ? ? "user_id",
+        });
+        dc.ready
+            .then(() => {
+                dc.initClickStream();
+                dc.initContent().then(() => dc.initClickStream());
+            })
+            .then(() => fetchInitiator(dc ? .browser_id ? ? ""));
+    </script>
 </body>
+
 </html>
